@@ -7,19 +7,22 @@ import {
   Chip,
   Typography,
 } from "@mui/material";
+import { useActivities } from "../../../lib/hooks/useActivities";
+import { useNavigate } from "react-router";
 
 type Props = {
   activity: Activity;
-  selectActivity: (id: string) => void;
-  deleteActivity: (id: string) => void;
 };
 
-const ActivityCard = ({ activity, selectActivity, deleteActivity }: Props) => {
+const ActivityCard = ({ activity }: Props) => {
+  const { deleteActivity } = useActivities();
+  const navigate = useNavigate();
+
   const handleSelectActivity = () => {
-    selectActivity(activity.id);
+    navigate(`/activities/${activity.id}`);
   };
   const handleDeleteActivity = () => {
-    deleteActivity(activity.id);
+    deleteActivity.mutate(activity.id);
   };
 
   return (
@@ -49,6 +52,7 @@ const ActivityCard = ({ activity, selectActivity, deleteActivity }: Props) => {
             variant="contained"
             color="error"
             onClick={handleDeleteActivity}
+            disabled={deleteActivity.isPending}
           >
             Delete Activity
           </Button>
