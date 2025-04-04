@@ -9,8 +9,11 @@ import {
 } from "@mui/material";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { useCounterStore } from "../../../lib/stores/counterStore";
 
 const ActivityFilters = () => {
+  const { count } = useCounterStore();
+
   return (
     <Box
       sx={{ display: "flex", flexDirection: "column", gap: 3, borderRadius: 3 }}
@@ -39,6 +42,7 @@ const ActivityFilters = () => {
             <MenuItem>
               <ListItemText primary="I'm hosting" />
             </MenuItem>
+            <MenuItem>{count}</MenuItem>
           </MenuList>
         </Box>
       </Paper>
