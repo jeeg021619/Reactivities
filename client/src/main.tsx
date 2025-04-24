@@ -11,14 +11,22 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider } from "react-router";
 import { router } from "./app/router/Routes.tsx";
 import { ToastContainer } from "react-toastify";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools />
-      <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools />
+        <ToastContainer
+          position="bottom-right"
+          hideProgressBar
+          theme="colored"
+        />
+        <RouterProvider router={router} />
+      </QueryClientProvider>
+    </LocalizationProvider>
   </StrictMode>
 );
