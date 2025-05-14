@@ -95,7 +95,7 @@ const RegisterForm = () => {
           to="/login"
           sx={{ color: "primary.main", ml: 1 }}
         >
-          Sign in
+          Login in
         </Typography>
       </Typography>
     </Paper>
