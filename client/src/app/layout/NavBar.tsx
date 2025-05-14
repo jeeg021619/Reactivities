@@ -11,9 +11,12 @@ import {
 import { NavLink } from "react-router";
 import MenuItemLink from "../shared/components/MenuItemLink";
 import { uiStore } from "../../lib/stores/uiStore";
+import { useAccount } from "../../lib/hooks/useAccount";
+import UserMenu from "./UserMenu";
 
 const NavBar = () => {
   const { loading } = uiStore();
+  const { currentUser } = useAccount();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -40,11 +43,19 @@ const NavBar = () => {
             </Box>
             <Box sx={{ display: "flex" }}>
               <MenuItemLink to="/activities">Activities</MenuItemLink>
-              <MenuItemLink to="/createActivity">Create Activity</MenuItemLink>
               <MenuItemLink to="/counter">Counter</MenuItemLink>
               <MenuItemLink to="/errors">Errors</MenuItemLink>
             </Box>
-            <MenuItem>User menu</MenuItem>
+            <Box display="flex" alignItems="center">
+              {currentUser ? (
+                <UserMenu />
+              ) : (
+                <>
+                  <MenuItemLink to="/login">Login</MenuItemLink>
+                  <MenuItemLink to="/register">Register</MenuItemLink>
+                </>
+              )}
+            </Box>
           </Toolbar>
         </Container>
         {loading ? (

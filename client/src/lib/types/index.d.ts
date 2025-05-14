@@ -11,9 +11,16 @@ type Activity = {
   longitude: number;
 };
 
-export type CreateActivityDTO = Omit<Activity, "id" | "isCancelled">;
+type User = {
+  id: string;
+  email: string;
+  displayName: string;
+  imageUrl?: string;
+};
 
-export type LocationIQSuggestion = {
+type CreateActivityDTO = Omit<Activity, "id" | "isCancelled">;
+
+type LocationIQSuggestion = {
   place_id: string;
   osm_id: string;
   osm_type: string;
@@ -29,7 +36,7 @@ export type LocationIQSuggestion = {
   address: LocationIQAdress;
 };
 
-export type LocationIQAdress = {
+type LocationIQAdress = {
   name: string;
   house_number: string;
   road: string;
